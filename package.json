@@ -1,0 +1,21 @@
+{
+  "name": "stort-verkefni2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint *.js",
+    "dev": "browser-sync start --server --files index.html video.html styles.css scripts.js vidScript.js",
+    "start": "nodewebkit"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "eslint": "^4.9.0"
+  },
+  "dependencies": {
+    "node-import": "^0.9.2"
+  }
+}
