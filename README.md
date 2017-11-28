@@ -4,6 +4,7 @@ Is a webpage, it uses scripts.js to build index.html
 and viScript.js to build video.html
 It uses videos.json to keep information about videos in 
 the videos folder.
+scripts.js uses jquery to get the json object.
 The svg images in img folder are for video player controls
 that are built in vidScript.js.
 To run this project you need to install node on your system.
