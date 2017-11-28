@@ -9,7 +9,7 @@ window.onload = function(){
     var name = document.createTextNode('Myndbandaleiga');
     storeName.append(name);
     build(result.videos,result.categories);				// Build the rest of the site.
-	var windowWidth = window.innerWidth;				// Get window size.
+    var windowWidth = window.innerWidth;				// Get window size.
     if(windowWidth < 1000){
       document.body.setAttribute("style","width: 500px");
     }
@@ -29,7 +29,7 @@ function resize(){
     }
   }else{
     document.body.setAttribute("style","width: 1000px");
-    for (var i = 0; i < elements.length;i++) {
+    for (i = 0; i < elements.length;i++) {
       elements[i].setAttribute("style","width: 48%");
     }
   }
@@ -73,36 +73,36 @@ function createPoster(categories,videos,box,i){
     (function(){										// Close function inside loop.
       var vidBox = crappend("div",box);					// Box for video poster and info.
       vidBox.className = "videoBox";					// Set class name for vidBox.
-	  if(window.innerWidth >= 1000){					// Check display size.
+      if(window.innerWidth >= 1000){					// Check display size.
         vidBox.setAttribute("style","width: 48%");		// Set vidBox size accordingly.
       }else{
         vidBox.setAttribute("style","width: 100%");
-	  }
+      }
       var posterBox = crappend("div",vidBox);			// Box for poster.
       posterBox.className = "posterBox";				// Set class for the box.
-	  
+
       var poster = crappend("img",posterBox);			// The atual image object for the poster.
       var vid = findID(videos,categories[i].videos[j]);	// Find the right video object.
       poster.src = vid.poster;							// Image source for the poster.
-	  poster.className = "poster";						// Set class for poster.
-	  var enc = btoa(JSON.stringify(vid));				// Encode json object.
+      poster.className = "poster";						// Set class for poster.
+      var enc = btoa(JSON.stringify(vid));				// Encode json object.
       var linkString = "video.html?"+ enc;				// Create link string for video.
       vidBox.addEventListener('click', function() {		// Create event listener.
         location.href = linkString;						// Link to the video.
       }, false);
-	  
+
       var videoInfo = crappend("div",vidBox);			// Inforamtion box for the video.
       videoInfo.className = "infobox";
       var vidTitleBox = crappend("div",videoInfo);		// The title of the video.
       vidTitleBox.className = "vidTitle";				// Set class for title.
       var title = document.createTextNode(vid.title);	// Get the title text.
       vidTitleBox.appendChild(title);					// Append text to dom object.
-	  	
+	
       var creation = crappend("div",videoInfo);			// Create dom object for creation time.
       var creaTime = calcTime(vid.created);				// Get creation time and run it through method.
       var created = document.createTextNode(creaTime);	// Make text node with the result.
       creation.append(created);							// Append text to dom object.	
-	  	
+	
       var durBox = crappend("div",posterBox);			// Create dom object for duration.
       durBox.className = "durationBox";					// Set class for duration.
       var dur = calcDuration(vid.duration);				// Get the  videos duration and run through method.
