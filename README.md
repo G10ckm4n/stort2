@@ -11,5 +11,10 @@ Then write into console
 > npm install
 > npm install nodewebkit 
 > npm run eslint
-in the 
-sites root directory.
+at the sites root directory.
+Node webkit has been added to package.json
+by adding 
+"start": "nodewebkit"
+to scripts.
+All css is kept in styles.css
+This webpage was created by Petur Sigurdsson.
