@@ -57,7 +57,7 @@ body{
 	left: 80%;
 	top: 80%;
 	width: 3em;
-	background-color: #333;
+	background-color: rgba(0,0,0,0.5);
 	text-align: center;
 	font-family: "Roboto";
 	color: white;
@@ -104,7 +104,7 @@ body{
 	position: absolute;
 	top: 0;
 	width: 100%;
-	background-color: rgba(102,102,102,0.2);
+	background-color: rgba(0,0,0,0.2);
 	cursor: pointer;
 }
 .overlayButton{
@@ -130,6 +130,19 @@ body{
 	cursor: pointer;
 	margin-left: 0.5em;
 	margin-right: 0.5em;
+}
+.tilbaka{
+	display: block;
+	width: 30%;
+	margin: auto;
+	color: white;
+	font-family: Roboto;
+	font-weight: bold;
+	font-size: 1em;
+	text-decoration: none;
+	text-align: center;
+	padding-top: 1em;
+	margin-bottom: 2em;
 }
 img{
 

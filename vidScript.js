@@ -1,13 +1,6 @@
 var videoObject;
 var videoHeight;
 window.onload = function(){
-  window.onresize = fun(){
-    var windowWidth = window.innerWidth;
-	console.log(windowWidth);
-    if(windowWidth < 1000){
-      document.body.setAttribute("style","width: 500px");
-    }
-  }
   videoObject = getSrc();
   build();									// Call function to build page.
 }
@@ -16,7 +9,6 @@ window.onload = function(){
  * A container for the video.
  * The video whos source is resolved by getSrc().
  * A control hub, which is set by setControls().
- * An overlay, it's height must be checked by checkHeight() after a delay.
  */
 function build(){
   var titleContainer = crappend("div",document.body);
@@ -37,12 +29,12 @@ function build(){
  * Check the height of video to set the height of overlay.
  */
 function checkHeight(video,overlay,overPlay){
-  for(var i = 0; i < 5; i++){
-    setTimeout(function() { 
+  for(var i = 0; i < 5; i++){				// Loop a timeout function that will resize the overlay.
+    setTimeout(function() { 				// It loops 5 times with a timeout of 500 ms each time.
     overPlay.setAttribute("style","margin-top:"+((videoHeight/2)-50)+"px");
     videoHeight = video.clientHeight;
     overlay.setAttribute("style","height:"+videoHeight+"px");
-    },510);
+    },500);
   }
 }
 /*
@@ -51,16 +43,27 @@ function checkHeight(video,overlay,overPlay){
 function getSrc(){
   var url = window.location.search;			// Get the relevant part of adress string.
   url = url.replace("?", '');				// Make it more relevant.
-  var url = atob(url);						// Decrypt it.
+  try{
+    var url = atob(url);					// Decrypt it.
+  }catch(e){
+    return alert(e);
+  }
   
   var regex = new RegExp('%22','g');		// Create regex to replace %22.
   url = url.replace(regex,'"');				// with ".
   url = url.replace("%20",' ');				// and %20 with ' '(space).
-  console.log(url);
-  var video = JSON.parse(url);				// Make an object from json string.
+  try{
+    var video = JSON.parse(url);				// Make an object from json string.    
+  }catch(e){
+    alert(e);
+  }
   return video;								// Return source of video.
 }
-
+/*
+ * Creates and sets controler elements for the video.
+ * Handles different page sizes.
+ * Input: container, overlay, video DOM elements.
+ */
 function setControls(container, overlay, video){
   var controlHub = crappend("div",container);
   controlHub.className = "cHub";
@@ -95,8 +98,36 @@ function setControls(container, overlay, video){
   next.src       = "img/next.svg";
   next.className = "controlItem";
   next.addEventListener('click', function(){nextButton(video,1)}, false);
+  
+  var windowWidth = window.innerWidth;
+  if(windowWidth < 1000){
+    document.body.setAttribute("style","width: 500px");
+    controlHub.setAttribute("style","height: 1.5em");
+  }
+  
+  var tilbaka = crappend("a", document.body);
+  var tilbakaTexti = document.createTextNode("Til baka");
+  tilbaka.append(tilbakaTexti);
+  tilbaka.href = "index.html";
+  tilbaka.className = "tilbaka";
+  
+  window.onresize = function(){
+    windowWidth = window.innerWidth;
+	checkHeight(video,overlay,overPlay);
+	overlay.setAttribute("style","height:"+videoHeight+"px");
+    if(windowWidth < 1000){
+      document.body.setAttribute("style","width: 500px");
+	  controlHub.setAttribute("style","height: 1.5em");
+    }else{
+      document.body.setAttribute("style","width: 1000px");
+	  controlHub.setAttribute("style","height: 3em");
+    }
+  }
 }
-
+/*
+ * Play button event handler and set image.
+ * Input: overlay, play, video DOM elements.
+ */
 function playButton(overlay, play, video) {
   if(play.src.includes("play")){
     video.play();
@@ -108,6 +139,10 @@ function playButton(overlay, play, video) {
 	overlay.style.opacity = 1;
   }
 }
+/*
+ * Next/Back button event handler.
+ * Input: video, back DOM elements.
+ */
 function nextButton(video, back){
   
   time = video.currentTime + 3*back;
@@ -126,7 +161,10 @@ function nextButton(video, back){
     }
   }
 }
-
+/*
+ * Mute button event handler and set image.
+ * Input: mute, video DOM elements.
+ */
 function muteButton(mute, video){
 	if(video.muted){
 		video.muted = false;
@@ -136,13 +174,16 @@ function muteButton(mute, video){
 	  mute.src = "img/unmute.svg";
 	}
 }
-
+/*
+ * Fullscreen button event handler.
+ * Input: video DOM element.
+ */
 function fullscreenButton(video){
 	video.webkitRequestFullscreen();;
 }
 /*
  * Creates given type and appends to parent.
- * input: String type, DOM object par.
+ * Input: String type, DOM object par.
  */
 function crappend(type,par){
   var child = document.createElement(type);					// Create element of given type.
