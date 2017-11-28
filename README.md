@@ -7,4 +7,9 @@ the videos folder.
 The svg images in img folder are for video player controls
 that are built in vidScript.js.
 To run this project you need to install node on your system.
-Then write into console "npm install eslint"
+Then write into console
+> npm install
+> npm install nodewebkit 
+> npm run eslint
+in the 
+sites root directory.
