@@ -3,7 +3,9 @@
  * Resizes elements when window is resized.
  */
 window.onload = function(){
+  document.body.innerHTML = "Hled gogn";
   $.getJSON("videos.json", function(result){			// Use jquery to get json file.
+    document.body.innerHTML = "";
     var storeName = crappend("div",document.body);		// Set main title in page.
     storeName.className = "storeName";					// Set title class.
     var name = document.createTextNode('Myndbandaleiga');

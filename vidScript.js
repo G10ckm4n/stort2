@@ -1,6 +1,7 @@
 var videoObject;
 var videoHeight;
 window.onload = function(){
+  document.body.innerHTML = "Hled gogn";
   videoObject = getSrc();
   build();									// Call function to build page.
 }
@@ -11,6 +12,7 @@ window.onload = function(){
  * A control hub, which is set by setControls().
  */
 function build(){
+  document.body.innerHTML = "";
   var titleContainer = crappend("div",document.body);
   var titleText = document.createTextNode(videoObject.title);
   titleContainer.append(titleText);
